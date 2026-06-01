@@ -5,6 +5,7 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({extended: false}));
 
 hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
@@ -15,6 +16,15 @@ app.use(session({
     saveUninitialized: true,
     cookie: {secure : false}
 }));
+
+// Autenticação do Cliente
+function authCliente(req, res, next){
+    if(!req.session.cliente){
+        return res.render('login-clientes', {titulo: "Faça o login para acessar a página"});
+    }
+
+    next();
+}
 
 // Rota de teste
 app.get('/teste', (req, res) => {
@@ -31,27 +41,51 @@ app.post('/cliente/cadastro', async (req, res) => {
         const {nome, cpf, email, senha, endereco} = req.body;
         const cliente = new Cliente(nome, cpf, email, senha, endereco);
 
-        await cliente.validar();
+        cliente.validar();
         await cliente.inserirDB();
-
-        res.render('cadastro-clientes', {titulo: 'Deu certo'});
+        
+        res.render('login-clientes', {titulo: 'Login'});
     }catch(err){
-        res.render('cadastro-clientes', {erro: "Erro ao cadastrar"});
+        res.render('cadastro-clientes', {titulo: "Erro ao cadastrar o cliente"});
         Cliente.logError(err);
     }
-});
-
-app.get('/cliente/login', (req, res) => {
-    res.render('login-clientes', {titulo: 'Login de Cliente'});
 });
 
 app.post('/cliente/login', async (req, res) => {
     try{
-        res.render('login-clientes', {titulo: 'Deu certo login'});
+        const cpf = req.body.cpf, senha = req.body.senha;
+        const cliente = await Cliente.pesquisarCpf(cpf);
+
+        if(cliente.cpf !== cpf){
+            console.log('CPF incorreto');
+        }
+
+        if(cliente.senha !== senha){
+            console.log('Senha incorreta');
+        }
+
+        req.session.cliente = {
+            nome: cliente.nome,
+            cpf: cliente.cpf,
+            email: cliente.email,
+            endereco: cliente.endereco
+        };
+
+        res.redirect('/cliente/minhaconta');
     }catch(err){
-        res.render('login-clientes', {erro: "Erro login"});
+        res.render('login-clientes', {titulo: "Erro ao realizar login do cliente"});
         Cliente.logError(err);
     }
+});
+
+app.get('/cliente/minhaconta', authCliente, (req, res) => {
+    res.render('minha-conta', {titulo: 'Minha Conta', dados: req.session.cliente});
+});
+
+app.get('/cliente/logout', authCliente, (req, res) => {
+    req.session.destroy(() => {
+        res.render('login-clientes', {titulo: 'Login'});
+    });
 });
 
 app.listen(8000);

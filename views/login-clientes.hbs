@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{titulo}}</title>
 </head>
 <body>
     <h1>{{titulo}}</h1>
+
+    <form action="/cliente/login" method="POST" accept-charset="utf-8">
+        <div>
+            <label for="cpf">CPF:</label>
+            <input type="text" name="cpf" value="">
+        </div><br>
+
+        <div>
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" value="">
+        </div><br>
+
+        <div class="button">
+            <button type="submit">Entrar</button>
+        </div>
+    </form>
 </body>
 </html>

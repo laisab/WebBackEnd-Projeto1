@@ -61,3 +61,33 @@
 [2026-05-31T01:17:39.204Z] Erro ao inserir Cliente: Cannot read properties of undefined (reading 'nome')
 [2026-05-31T01:17:46.487Z] Erro ao inserir Cliente: Cannot read properties of undefined (reading 'nome')
 [2026-05-31T01:20:19.542Z] Erro ao inserir Cliente: Cannot read properties of undefined (reading 'nome')
+[2026-06-01T12:49:12.526Z] Erro ao inserir Cliente: O nome do cliente é obrigatório.
+[2026-06-01T12:49:44.428Z] Erro ao inserir Cliente: O nome do cliente é obrigatório.
+[2026-06-01T12:49:55.160Z] Erro ao inserir Cliente: O CPF do cliente é obrigatório.
+[2026-06-01T12:51:40.170Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "12369874511" }
+[2026-06-01T12:51:51.097Z] Erro ao inserir Cliente: O CPF é inválido, pois possui letras ou não possui 11 caracteres.
+[2026-06-01T12:52:27.870Z] Erro ao inserir Cliente: O CPF é inválido, pois possui letras ou não possui 11 caracteres.
+[2026-06-01T12:53:00.986Z] Erro ao inserir Cliente: O CPF é inválido, pois possui letras ou não possui 11 caracteres.
+[2026-06-01T13:26:37.845Z] Erro ao inserir Cliente: prompt is not defined
+[2026-06-01T13:27:18.915Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "13131313245" }
+[2026-06-01T13:27:23.754Z] Erro ao inserir Cliente: alert is not defined
+[2026-06-01T13:27:29.972Z] Erro ao inserir Cliente: alert is not defined
+[2026-06-01T13:28:45.031Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "13131313245" }
+[2026-06-01T13:30:18.939Z] Erro ao inserir Cliente: O nome do cliente é obrigatório.
+[2026-06-01T13:32:03.740Z] Erro ao inserir Cliente: cliente is not defined
+[2026-06-01T13:32:18.915Z] Erro ao inserir Cliente: cliente is not defined
+[2026-06-01T13:32:21.137Z] Erro ao inserir Cliente: cliente is not defined
+[2026-06-01T13:32:33.132Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "02695678911" }
+[2026-06-01T13:32:43.512Z] Erro ao inserir Cliente: cliente is not defined
+[2026-06-01T13:33:50.611Z] Erro ao inserir Cliente: cpfCadastrado is not defined
+[2026-06-01T13:33:53.931Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "02695678911" }
+[2026-06-01T13:34:09.293Z] Erro ao inserir Cliente: cpfCadastrado is not defined
+[2026-06-01T13:34:39.860Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "02695678911" }
+[2026-06-01T13:35:55.720Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "02695678911" }
+[2026-06-01T13:36:51.785Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "02695678911" }
+[2026-06-01T13:43:25.162Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "02695678911" }
+[2026-06-01T13:43:33.809Z] Erro ao inserir Cliente: Cannot read properties of null (reading 'cpf')
+[2026-06-01T13:45:26.090Z] Erro ao inserir Cliente: Cannot read properties of null (reading 'cpf')
+[2026-06-01T13:46:32.616Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "05051983437" }
+[2026-06-01T14:36:06.366Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "98745632101" }
+[2026-06-01T14:39:36.339Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "78945612300" }
