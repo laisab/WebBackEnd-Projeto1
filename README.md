@@ -1,8 +1,8 @@
 # E-commerce
 
-## Projeto 1 - Programação Web Back-End
+## Projeto 2 - Programação Web Back-End
 
-Este projeto foi desenvolvido como parte da disciplina de Programação Web Back-End, com o objetivo de implementar um sistema de e-commerce utilizando Node.js e MongoDB.
+Este projeto foi desenvolvido como parte da disciplina de Programação Web Back-End, com o objetivo de implementar um sistema de e-commerce utilizando Node.js, MongoDB, Express.js e Handlebars.
 
 ### Funcionalidades
 O sistema gerencia três entidades principais: **Vendedor**, **Produto** e **Cliente**.
@@ -13,29 +13,53 @@ O sistema gerencia três entidades principais: **Vendedor**, **Produto** e **Cli
 * **Persistência:** Uso de MongoDB com conexão centralizada.
 * **Log de Erros:** Captura e armazenamento automático de exceções em um arquivo `error.log`.
 
-### Como Executar (com Node.js instalado e o MongoDB rodando)
+### Como Executar
 
-Clone o repositório:
-   
-`git clone https://github.com/laisab/WebBackEnd-Projeto1.git`
+1. Clone o repositório:
 
-Instale as dependências:
+   ```bash
+   https://github.com/laisab/WebBackEnd-Projeto2.git
+   ```
 
-`npm install`
+2. Instale as dependências:
 
-Configure a URI do seu banco de dados no arquivo `db.js`.
+   ```bash
+   npm install
+   ```
 
-Execute o sistema:
+3. Configure a URI do seu banco de dados no arquivo `db.js`.
 
-`node index.js`
+4. Execute o sistema:
+
+   ```bash
+   node app.js
+   ```
+
+5. Abra o navegador e acesse:
+
+
+   ```bash
+   localhost:8000/[NOME DA ROTA DESEJADA]
+   ```
 
 ### Estrutura do Projeto
 
 ```text
-├── Cliente.js      # Classe de modelo do Cliente
-├── Produto.js      # Classe de modelo do Produto
-├── Vendedor.js     # Classe de modelo do Vendedor
+├── node_modules/
+├── model/
+│   ├── Cliente.js      # Classe de modelo do Cliente       
+│   ├── Produto.js      # Classe de modelo do Produto
+│   └── Vendedor.js     # Classe de modelo do Vendedor
+├── views/
+│   ├── cadastro-clientes.hbs       
+│   ├── cadastro-produtos.hbs
+│   ├── cadastro-vendedores.hbs
+│   ├── login-clientes.hbs
+│   ├── login-vendedores.hbs
+│   ├── minha-conta-cliente.hbs
+│   ├── minha-conta-vendedor.hbs
+│   └── produtos.js
+├── app.js          # Arquivo principal
 ├── db.js           # Configuração da conexão com MongoDB
-├── index.js        # Script principal de execução
 ├── error.log       # Arquivo de log gerado automaticamente
 └── package.json    # Dependências do projeto
