@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{titulo}}</title>
+</head>
+
+<body>
+  <h1>{{titulo}}</h1>
+
+  <form action="/produto/busca" method="GET" accept-charset="utf-8">
+    <label for="busca">Busca:</label>
+    <input type="text" name="busca" id="busca" value="">
+
+    <div class="button">
+      <input type="submit" value="Buscar">
+    </div>
+  </form>
+
+  <ul>
+    {{#produtos}}
+    <li>{{nome}} - R${{preco}}</li>
+    {{/produtos}}
+  </ul>
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 const http = require('http'), express = require('express'), session = require('express-session'), hbs = require('hbs'), path = require('path'), app = express();
 const Cliente = require('./model/Cliente'), Vendedor = require('./model/Vendedor'), Produto = require('./model/Produto');
+const conectarDB = require('./db');
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -115,6 +116,10 @@ app.post('/vendedor/cadastro', async (req, res) => {
     }
 });
 
+app.get('/vendedor/login', (req, res) => {
+    res.render('login-vendedores', {titulo: 'Login'});
+});
+
 app.post('/vendedor/login', async (req, res) => {
     try{
         const cnpj = req.body.cnpj, senha = req.body.senha;
@@ -152,10 +157,6 @@ app.get('/vendedor/logout', authVendedor, (req, res) => {
 });
 
 // Rotas do Produto
-/*app.get('/produto/cadastro', authVendedor, (req, res) => {
-    res.render('cadastro-produtos', {titulo: 'Cadastro de Produto'});
-});*/
-
 app.get('/produto/cadastro', authVendedor, (req, res) => {
     res.render('cadastro-produtos', {titulo: 'Cadastro de Produto'});
 });
@@ -163,15 +164,40 @@ app.get('/produto/cadastro', authVendedor, (req, res) => {
 app.post('/produto/cadastro', authVendedor, async (req, res) => {
     try{
         const {nome, descricao, preco} = req.body;
+        const precoNumero = Number(preco);
         const vendedorCnpj = req.session.vendedor.cnpj;
-        const produto = new Produto(nome, descricao, preco, vendedorCnpj);
+        const produto = new Produto(nome, descricao, precoNumero, vendedorCnpj);
 
         produto.validar();
         await produto.inserirDB();
         
-        // res.render('login-vendedores', {titulo: 'Login'});
+        res.redirect('/produto/lista');
     }catch(err){
         res.render('cadastro-produtos', {titulo: "Erro ao cadastrar o produto"});
+        Produto.logError(err);
+    }
+});
+
+app.get('/produto/lista', async (req, res) => {
+    try{
+        const db = await conectarDB();
+        const collection = db.collection("produtos");
+        const listaProdutos = await collection.find().toArray();
+
+        res.render('produtos', {titulo: 'Lista de Produtos', produtos: listaProdutos});
+    }catch(err){
+        Produto.logError(err);
+    }
+});
+
+app.get('/produto/busca', async (req, res) => {
+    try{
+        const nomeBusca = req.query.busca;
+        const produto = await Produto.pesquisarNome(nomeBusca);
+
+        res.render('produtos', {titulo: 'Produtos', produtos: produto});
+    }catch(err){
+        res.redirect('/produto/lista');
         Produto.logError(err);
     }
 });
