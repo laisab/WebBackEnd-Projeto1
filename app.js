@@ -7,8 +7,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: false}));
 
-hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
-
 // Middleware que implementa a session
 app.use(session({
     secret: 'segredo',
@@ -21,6 +19,15 @@ app.use(session({
 function authCliente(req, res, next){
     if(!req.session.cliente){
         return res.render('login-clientes', {titulo: "Faça o login para acessar a página"});
+    }
+
+    next();
+}
+
+// Autenticação do Vendedor
+function authVendedor(req, res, next){
+    if(!req.session.vendedor){
+        return res.render('login-vendedores', {titulo: "Faça o login para acessar a página"});
     }
 
     next();
@@ -79,12 +86,68 @@ app.post('/cliente/login', async (req, res) => {
 });
 
 app.get('/cliente/minhaconta', authCliente, (req, res) => {
-    res.render('minha-conta', {titulo: 'Minha Conta', dados: req.session.cliente});
+    res.render('minha-conta-cliente', {titulo: 'Minha Conta', dados: req.session.cliente});
 });
 
 app.get('/cliente/logout', authCliente, (req, res) => {
     req.session.destroy(() => {
         res.render('login-clientes', {titulo: 'Login'});
+    });
+});
+
+// Rotas do Vendedor
+app.get('/vendedor/cadastro', (req, res) => {
+    res.render('cadastro-vendedores', {titulo: 'Cadastro de Vendedor'});
+});
+
+app.post('/vendedor/cadastro', async (req, res) => {
+    try{
+        const {nome, cnpj, senha, endereco} = req.body;
+        const vendedor = new Vendedor(nome, cnpj, senha, endereco);
+
+        vendedor.validar();
+        await vendedor.inserirDB();
+        
+        res.render('login-vendedores', {titulo: 'Login'});
+    }catch(err){
+        res.render('cadastro-vendedores', {titulo: "Erro ao cadastrar o vendedor"});
+        Vendedor.logError(err);
+    }
+});
+
+app.post('/vendedor/login', async (req, res) => {
+    try{
+        const cnpj = req.body.cnpj, senha = req.body.senha;
+        const vendedor = await Vendedor.pesquisarCnpj(cnpj);
+
+        if(vendedor.cnpj !== cnpj){
+            console.log('CNPJ incorreto');
+        }
+
+        if(vendedor.senha !== senha){
+            console.log('Senha incorreta');
+        }
+
+        req.session.vendedor = {
+            nome: vendedor.nome,
+            cnpj: vendedor.cnpj,
+            endereco: vendedor.endereco
+        };
+
+        res.redirect('/vendedor/minhaconta');
+    }catch(err){
+        res.render('login-vendedores', {titulo: "Erro ao realizar login do vendedor"});
+        Vendedor.logError(err);
+    }
+});
+
+app.get('/vendedor/minhaconta', authVendedor, (req, res) => {
+    res.render('minha-conta-vendedor', {titulo: 'Minha Conta', dados: req.session.vendedor});
+});
+
+app.get('/vendedor/logout', authVendedor, (req, res) => {
+    req.session.destroy(() => {
+        res.render('login-vendedores', {titulo: 'Login'});
     });
 });
 

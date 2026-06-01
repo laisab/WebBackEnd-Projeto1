@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{titulo}}</title>
+</head>
+<body>
+    <h1>{{titulo}}</h1>
+
+    <form action="/vendedor/cadastro" method="POST" accept-charset="utf-8">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" value="">
+        </div><br>
+        
+        <div>
+            <label for="cnpj">CNPJ:</label>
+            <input type="text" name="cnpj" value="">
+        </div><br>
+
+        <div>
+            <label for="endereco">Endereço:</label>
+            <input type="text" name="endereco" value="">
+        </div><br>
+
+        <div>
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" value="">
+        </div><br>
+
+        <div class="button">
+            <button type="submit">Cadastrar</button>
+        </div>
+    </form>
+</body>
+</html>

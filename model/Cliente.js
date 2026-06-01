@@ -90,7 +90,7 @@ class Cliente{
         }
     }
 
-    async deletarCpf(cpf){
+    static async deletarCpf(cpf){
         try{
             const db = await conectarDB();
             const collection = db.collection("clientes");

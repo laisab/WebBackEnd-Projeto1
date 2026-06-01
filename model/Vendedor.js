@@ -2,9 +2,10 @@ const conectarDB = require('../db');
 const fs = require('fs');
 
 class Vendedor{
-    constructor(nome, cnpj, endereco){
+    constructor(nome, cnpj, senha, endereco){
         this.nome = nome;
         this.cnpj = cnpj;
+        this.senha = senha;
         this.endereco = endereco;
     }
 
@@ -33,10 +34,18 @@ class Vendedor{
             }
             this.cnpj = cnpjLimpo;
         }
+
+        if(!this.senha){
+            throw new Error("A senha do vendedor é obrigatória.");
+        }
+
+        if(this.senha.length < 5){
+            throw new Error("A senha deve ter 5 ou mais caracteres.");
+        }
     }
 
     static async logError(error){
-        const mensagem = `[${new Date().toISOString()}] Erro ao inserir Produto: ${error.message}\n`;
+        const mensagem = `[${new Date().toISOString()}] Erro ao inserir Vendedor: ${error.message}\n`;
         fs.appendFileSync('error.log', mensagem);
     }
 
@@ -48,17 +57,18 @@ class Vendedor{
             const result = await collection.insertOne({
                 nome: this.nome,
                 cnpj: this.cnpj,
+                senha: this.senha,
                 endereco: this.endereco
             });
 
             console.log("Vendedor inserido: ID", result.insertedId);
-            return result;
+            return await result;
         }catch(error){
             Vendedor.logError(error);
         }
     }
 
-    async pesquisarCnpj(cnpj){
+    static async pesquisarCnpj(cnpj){
         try{
             const db = await conectarDB();
             const collection = db.collection("vendedores");
@@ -73,13 +83,13 @@ class Vendedor{
                 console.log("Vendedor não encontrado.");
             }
 
-            return result;
+            return await result;
         }catch(error){
             Vendedor.logError(error);
         }
     }
 
-    async deletarCnpj(cnpj){
+    static async deletarCnpj(cnpj){
         try{
             const db = await conectarDB();
             const collection = db.collection("vendedores");

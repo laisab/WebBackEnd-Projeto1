@@ -91,3 +91,14 @@
 [2026-06-01T13:46:32.616Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "05051983437" }
 [2026-06-01T14:36:06.366Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "98745632101" }
 [2026-06-01T14:39:36.339Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "78945612300" }
+[2026-06-01T15:08:37.236Z] Erro ao inserir Cliente: E11000 duplicate key error collection: ecommerce.clientes index: cpf_1 dup key: { cpf: "12345678903" }
+[2026-06-01T15:18:24.863Z] Erro ao inserir Cliente: Cannot read properties of undefined (reading 'cpf')
+[2026-06-01T15:20:04.925Z] Erro ao inserir Cliente: Cannot read properties of undefined (reading 'cpf')
+[2026-06-01T15:42:37.413Z] Erro ao inserir Produto: E11000 duplicate key error collection: ecommerce.vendedores index: cnpj_1 dup key: { cnpj: "12345678912345" }
+[2026-06-01T15:49:47.145Z] Erro ao inserir Produto: E11000 duplicate key error collection: ecommerce.vendedores index: cnpj_1 dup key: { cnpj: "12345678912340" }
+[2026-06-01T15:52:52.853Z] Erro ao inserir Produto: E11000 duplicate key error collection: ecommerce.vendedores index: cnpj_1 dup key: { cnpj: "12345678912340" }
+[2026-06-01T15:56:22.069Z] Erro ao inserir Produto: Cannot read properties of null (reading 'cnpj')
+[2026-06-01T15:56:24.214Z] Erro ao inserir Produto: Cannot read properties of null (reading 'cnpj')
+[2026-06-01T15:56:57.177Z] Erro ao inserir Produto: A senha do cliente é obrigatória.
+[2026-06-01T15:56:59.845Z] Erro ao inserir Produto: A senha do cliente é obrigatória.
+[2026-06-01T15:58:24.601Z] Erro ao inserir Produto: A senha do cliente é obrigatória.
