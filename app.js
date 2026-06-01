@@ -59,6 +59,10 @@ app.post('/cliente/cadastro', async (req, res) => {
     }
 });
 
+app.get('/cliente/login', (req, res) => {
+    res.render('login-clientes', {titulo: 'Login'});
+});
+
 app.post('/cliente/login', async (req, res) => {
     try{
         const cpf = req.body.cpf, senha = req.body.senha;
@@ -94,6 +98,19 @@ app.get('/cliente/logout', authCliente, (req, res) => {
     req.session.destroy(() => {
         res.render('login-clientes', {titulo: 'Login'});
     });
+});
+
+app.post('/cliente/apagar', async (req, res) => {
+    try{
+        const cpf = req.body.cpf;
+        await Cliente.deletarCpf(cpf);
+
+        req.session.destroy(() => {
+            res.redirect('/cliente/cadastro');
+        });
+    }catch(err){
+        Cliente.logError(err);
+    }
 });
 
 // Rotas do Vendedor
@@ -154,6 +171,19 @@ app.get('/vendedor/logout', authVendedor, (req, res) => {
     req.session.destroy(() => {
         res.render('login-vendedores', {titulo: 'Login'});
     });
+});
+
+app.post('/vendedor/apagar', async (req, res) => {
+    try{
+        const cnpj = req.body.cnpj;
+        await Vendedor.deletarCnpj(cnpj);
+
+        req.session.destroy(() => {
+            res.redirect('/vendedor/cadastro');
+        });
+    }catch(err){
+        Vendedor.logError(err);
+    }
 });
 
 // Rotas do Produto

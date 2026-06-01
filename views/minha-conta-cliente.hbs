@@ -17,11 +17,14 @@
         <li>Endereço: {{dados.endereco}}</li>
     </ul>
 
-    <div class="button">
-        <a href="/cliente/logout">
-            <button type="submit">Sair</button>
-        </a>
-    </div><br>
+    <a href="/cliente/logout">
+        <button type="submit">Sair</button>
+    </a>
+
+    <form action="/cliente/apagar" method="POST">
+        <input type="hidden" name="cpf" value="{{dados.cpf}}">
+        <button type="submit">Apagar conta</button>
+    </form>
 </body>
 
 </html>
