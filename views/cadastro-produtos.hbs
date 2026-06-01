@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{titulo}}</title>
+</head>
+<body>
+    <h1>{{titulo}}</h1>
+
+    <form action="/produto/cadastro" method="POST" accept-charset="utf-8">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" value="">
+        </div><br>
+        
+        <div>
+            <label for="descricao">Descrição:</label>
+            <input type="text" name="descricao" value="">
+        </div><br>
+
+        <div>
+            <label for="preco">Preço:</label>
+            <input type="text" name="preco" value="" inputmode="numeric">
+        </div><br>
+
+        <div class="button">
+            <button type="submit">Cadastrar</button>
+        </div>
+    </form>
+</body>
+</html>

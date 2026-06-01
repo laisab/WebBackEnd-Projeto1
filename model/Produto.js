@@ -70,13 +70,13 @@ class Produto {
             });
 
             console.log("Produto inserido: ID", result.insertedId);
-            return result;
+            return await result;
         }catch(error){
             Produto.logError(error);
         }
     }
 
-    async pesquisarNome(nome){
+    static async pesquisarNome(nome){
         try{
             const db = await conectarDB();
             const collection = db.collection("produtos");
@@ -97,7 +97,7 @@ class Produto {
         }
     }
 
-    async deletarNome(nome){
+    static async deletarNome(nome){
         try{
             const db = await conectarDB();
             const collection = db.collection("produtos");

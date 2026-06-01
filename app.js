@@ -151,4 +151,29 @@ app.get('/vendedor/logout', authVendedor, (req, res) => {
     });
 });
 
+// Rotas do Produto
+/*app.get('/produto/cadastro', authVendedor, (req, res) => {
+    res.render('cadastro-produtos', {titulo: 'Cadastro de Produto'});
+});*/
+
+app.get('/produto/cadastro', authVendedor, (req, res) => {
+    res.render('cadastro-produtos', {titulo: 'Cadastro de Produto'});
+});
+
+app.post('/produto/cadastro', authVendedor, async (req, res) => {
+    try{
+        const {nome, descricao, preco} = req.body;
+        const vendedorCnpj = req.session.vendedor.cnpj;
+        const produto = new Produto(nome, descricao, preco, vendedorCnpj);
+
+        produto.validar();
+        await produto.inserirDB();
+        
+        // res.render('login-vendedores', {titulo: 'Login'});
+    }catch(err){
+        res.render('cadastro-produtos', {titulo: "Erro ao cadastrar o produto"});
+        Produto.logError(err);
+    }
+});
+
 app.listen(8000);
